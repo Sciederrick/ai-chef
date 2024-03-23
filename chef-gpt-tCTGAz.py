@@ -1,6 +1,9 @@
 from openai import OpenAI
+import os
 
-client = OpenAI()
+client = OpenAI(
+    api_key=os.environ.get("OPENAI_API_KEY"),
+)
 
 messages = [
     {
@@ -28,7 +31,7 @@ messages.extend(
     ]
 )
 
-dish = input("Type the name of the dish you want a recipe for:\n")
+dish = input("Type anything that you want to ask from the Chef AI:\n")
 messages.append(
     {
         "role": "user",
