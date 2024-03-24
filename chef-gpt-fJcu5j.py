@@ -1,6 +1,9 @@
 from openai import OpenAI
+import os
 
-client = OpenAI()
+client = OpenAI(
+    api_key=os.environ.get("OPENAI_API_KEY"),
+)
 
 messages = [
      {
@@ -29,11 +32,13 @@ messages.extend(
 )
 
 
-dish = input("Type the name of the dish you want a recipe for:\n")
+user_input = input(
+    "\nType anything that you want to ask from Chef Derrick (recipe for a dish, ingredients for a dish, critique for a recipe).\n👨🏾: "
+)
 messages.append(
     {
         "role": "user",
-        "content": f"Suggest me a detailed recipe and the preparation steps for making {dish}"
+        "content": user_input
     }
 )
 
@@ -45,7 +50,7 @@ stream = client.chat.completions.create(
         stream=True,
     )
 
-collected_messages = []
+collected_messages = ["\n"]
 for chunk in stream:
     chunk_message = chunk.choices[0].delta.content or ""
     print(chunk_message, end="")
@@ -59,7 +64,7 @@ messages.append(
 )
 
 while True:
-    print("\n")
+    print("\n: ")
     user_input = input()
     messages.append(
         {
@@ -72,7 +77,7 @@ while True:
         messages=messages,
         stream=True,
     )
-    collected_messages = []
+    collected_messages = ["\n"]
     for chunk in stream:
         chunk_message = chunk.choices[0].delta.content or ""
         print(chunk_message, end="")

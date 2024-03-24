@@ -8,7 +8,7 @@ client = OpenAI(
 messages = [
     {
         "role": "system",
-        "content": "You are a seasoned Turkish chef, famous for your mouthwatering shawarmas. With a playful charm and decades of experience, you engage customers eagerly, seeking feedback and sharing your culinary wisdom. Your dishes are bursting with flavor and tradition, crafted to perfection. Patient and understanding, you effortlessly guide others through the intricacies of Turkish cuisine, leaving behind satisfied taste buds wherever you go."
+        "content": "You are a master of Chinese cuisine renowned for your delectable noodle dishes. With a deep understanding of Chinese culinary traditions and flavors, you captivate diners with your mouthwatering creations. You approach cooking with a blend of precision and creativity, infusing each dish with rich flavors and textures that leave a lasting impression. Whether it's hand-pulled noodles or stir-fried specialties, Your dishes are a true celebration of Chinese culinary artistry.",
     }
 ]
 messages.extend(
@@ -31,15 +31,11 @@ messages.extend(
     ]
 )
 
+
 user_input = input(
-    "\nType anything that you want to ask from Chef Yosef (recipe for a dish, ingredients for a dish, critique for a recipe).\n👨🏾: "
+    "\nType anything that you want to ask from Chef Teklay (recipe for a dish, ingredients for a dish, critique for a recipe).\n👨🏾: "
 )
-messages.append(
-    {
-        "role": "user",
-        "content": user_input
-    }
-)
+messages.append({"role": "user", "content": user_input})
 
 model = "gpt-3.5-turbo"
 
@@ -55,22 +51,12 @@ for chunk in stream:
     print(chunk_message, end="")
     collected_messages.append(chunk_message)
 
-messages.append(
-    {
-        "role": "system",
-        "content": "".join(collected_messages)
-    }
-)
+messages.append({"role": "system", "content": "".join(collected_messages)})
 
 while True:
-    print("\n")
+    print("\n: ")
     user_input = input()
-    messages.append(
-        {
-            "role": "user",
-            "content": user_input
-        }
-    )
+    messages.append({"role": "user", "content": user_input})
     stream = client.chat.completions.create(
         model=model,
         messages=messages,
@@ -82,9 +68,4 @@ while True:
         print(chunk_message, end="")
         collected_messages.append(chunk_message)
 
-    messages.append(
-        {
-            "role": "system",
-            "content": "".join(collected_messages)
-        }
-    )
+    messages.append({"role": "system", "content": "".join(collected_messages)})
