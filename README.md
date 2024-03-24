@@ -3,6 +3,8 @@ An AI chef powered by Generative AI that runs on the CLI
 
 ![screenshot](./screenshot.png)
 
+[Report with the results of the experiment and the different outputs of the AI chefs [here]](./gen-ai-output-report.pdf)
+
 # how to run
 
 - Choose a chef from the list. Choose by entering an integer corresponding to the chef
@@ -21,3 +23,11 @@ pip install -r requirements.txt
 ```bash
 python3 main.py
 ```
+
+# improvements
+
+- Switch between the chefs after generating output
+
+- Getting concise, direct feedback for a dish based on the ingredients
+
+- Improve the asthetics to make the text more legible
